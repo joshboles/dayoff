@@ -5,9 +5,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
-
     <string name="btn_vacation">Vacation</string>
     <string name="btn_late">Late</string>
     <string name="btn_sick">Sick</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_full_splash">Splash</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>
