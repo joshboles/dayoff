@@ -2,6 +2,7 @@ package com.joshboles.dayoff;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +55,18 @@ public class FullSplashActivity extends Activity {
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
+
+        /**
+         * Set timer for showing the splash screen.
+         */
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                final Intent mainIntent = new Intent(FullSplashActivity.this, MainActivity.class);
+                FullSplashActivity.this.startActivity(mainIntent);
+                FullSplashActivity.this.finish();
+            }
+        }, 3000);
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
