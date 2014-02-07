@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -54,9 +54,9 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
-        Button btnVacation;
-        Button btnLate;
-        Button btnSick;
+        ImageView ivVacation;
+        ImageView ivLate;
+        ImageView ivSick;
 
         public PlaceholderFragment() {
         }
@@ -67,25 +67,25 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
 
-            btnVacation = (Button) rootView.findViewById(R.id.btn_vacation);
-            btnLate = (Button) rootView.findViewById(R.id.btn_late);
-            btnSick = (Button) rootView.findViewById(R.id.btn_sick);
+            ivVacation = (ImageView) rootView.findViewById(R.id.iv_vacation);
+            ivLate = (ImageView) rootView.findViewById(R.id.iv_late);
+            ivSick = (ImageView) rootView.findViewById(R.id.iv_sick);
 
-            btnVacation.setOnClickListener(new View.OnClickListener() {
+            ivVacation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     sendSMS("Hey, I had something come up and need to take a vacation day.");
                 }
             });
 
-            btnLate.setOnClickListener(new View.OnClickListener() {
+            ivLate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     sendSMS("Guys, I’m running late. Be in ASAP.");
                 }
             });
 
-            btnSick.setOnClickListener(new View.OnClickListener() {
+            ivSick.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     sendSMS("I’m not feeling well and will be using a sick day today.");
