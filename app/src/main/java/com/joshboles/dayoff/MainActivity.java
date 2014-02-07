@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -52,6 +54,10 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        Button btnVacation;
+        Button btnLate;
+        Button btnSick;
+
         public PlaceholderFragment() {
         }
 
@@ -59,7 +65,41 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+
+            btnVacation = (Button) rootView.findViewById(R.id.btn_vacation);
+            btnLate = (Button) rootView.findViewById(R.id.btn_late);
+            btnSick = (Button) rootView.findViewById(R.id.btn_sick);
+
+            btnVacation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendSMS("Hey, I had something come up and need to take a vacation day.");
+                }
+            });
+
+            btnLate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendSMS("Guys, I’m running late. Be in ASAP.");
+                }
+            });
+
+            btnSick.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendSMS("I’m not feeling well and will be using a sick day today.");
+                }
+            });
+
+
             return rootView;
+        }
+
+        public void sendSMS(String message){
+            String phoneNumber = "6143602177";
+            SmsManager sms = SmsManager.getDefault();
+            sms.sendTextMessage(phoneNumber, null, message, null, null);
         }
     }
 
