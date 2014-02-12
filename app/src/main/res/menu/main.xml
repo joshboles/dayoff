@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.joshboles.dayoff.MainActivity" >
     
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+    <item android:id="@+id/action_contacts"
+        android:title="@string/action_contacts"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_messages"
+        android:title="@string/action_messages"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>
