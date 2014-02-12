@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.joshboles.dayoff"
-    android:versionCode="2"
+    android:versionCode="4"
     android:versionName="1.0">
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -17,10 +17,6 @@
         <activity
             android:name="com.joshboles.dayoff.MainActivity"
             android:label="@string/title_activity_main" >
-        </activity>
-        <activity
-            android:name="com.joshboles.dayoff.SettingsActivity"
-            android:label="@string/title_activity_settings" >
         </activity>
         <activity
             android:name="com.joshboles.dayoff.FullSplashActivity"
