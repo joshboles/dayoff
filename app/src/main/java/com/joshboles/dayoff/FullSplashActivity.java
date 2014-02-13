@@ -2,6 +2,7 @@ package com.joshboles.dayoff;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,7 +10,11 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
+import com.joshboles.dayoff.helper.DatabaseHelper;
+import com.joshboles.dayoff.model.Contact;
+import com.joshboles.dayoff.model.Message;
 import com.joshboles.dayoff.util.SystemUiHider;
 
 /**
@@ -47,6 +52,8 @@ public class FullSplashActivity extends Activity {
      */
     private SystemUiHider mSystemUiHider;
 
+    DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +62,50 @@ public class FullSplashActivity extends Activity {
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
+
+        db = new DatabaseHelper(getApplicationContext());
+        Context context = getApplicationContext();
+
+        if(db.getAllContacts().size() == 0){
+            CharSequence text = "No contacts. Adding filler data.";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
+
+            Contact c1 = new Contact("Kevin Sturdevant", "1112223333");
+            Contact c2 = new Contact("Josh Boles", "7778889999");
+            Contact c3 = new Contact("Ghostbusters", "0000000000");
+
+            db.createContact(c1);
+            db.createContact(c2);
+            db.createContact(c3);
+        }
+
+        if(db.getMessage("vacation") == null){
+            CharSequence text = "Vacation message not found. Creating one.";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
+
+            Message mV = new Message("vacation", "Hey, I had something come up and need to take a vacation day.");
+            db.createMessage(mV);
+        }
+
+        if(db.getMessage("late") == null){
+            CharSequence text = "Late message not found. Creating one.";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
+
+            Message mL = new Message("late", "Guys, I’m running late. Be in ASAP.  \n");
+            db.createMessage(mL);
+        }
+
+        if(db.getMessage("sick") == null){
+            CharSequence text = "Sick message not found. Creating one.";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
+
+            Message mS = new Message("sick", "I’m not feeling well and will be using a sick day today.  \n");
+            db.createMessage(mS);
+        }
 
         /**
          * Set timer for showing the splash screen.
