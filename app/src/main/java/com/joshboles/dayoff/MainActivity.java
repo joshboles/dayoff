@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.joshboles.dayoff.helper.DatabaseHelper;
+import com.joshboles.dayoff.model.Message;
+
 public class MainActivity extends ActionBarActivity {
 
     @Override
@@ -63,6 +66,12 @@ public class MainActivity extends ActionBarActivity {
         ImageView ivLate;
         ImageView ivSick;
 
+        Message msgVacation;
+        Message msgLate;
+        Message msgSick;
+
+        DatabaseHelper db;
+
         public PlaceholderFragment() {
         }
 
@@ -71,6 +80,7 @@ public class MainActivity extends ActionBarActivity {
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+            db = new DatabaseHelper(getActivity().getApplicationContext());
 
             ivVacation = (ImageView) rootView.findViewById(R.id.iv_vacation);
             ivLate = (ImageView) rootView.findViewById(R.id.iv_late);
@@ -79,21 +89,24 @@ public class MainActivity extends ActionBarActivity {
             ivVacation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sendSMS("Hey, I had something come up and need to take a vacation day.");
+                    msgVacation = db.getMessage("vacation");
+                    sendSMS(msgVacation.getContent());
                 }
             });
 
             ivLate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sendSMS("Guys, I’m running late. Be in ASAP.");
+                    msgLate = db.getMessage("late");
+                    sendSMS(msgLate.getContent());
                 }
             });
 
             ivSick.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sendSMS("I’m not feeling well and will be using a sick day today.");
+                    msgSick = db.getMessage("sick");
+                    sendSMS(msgSick.getContent());
                 }
             });
 
