@@ -1,5 +1,7 @@
 package com.joshboles.dayoff;
 
+import android.app.ActionBar;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -8,7 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joshboles.dayoff.helper.DatabaseHelper;
 import com.joshboles.dayoff.model.Contact;
@@ -45,7 +50,8 @@ public class ContactActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == android.R.id.home) {
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -68,6 +74,9 @@ public class ContactActivity extends ActionBarActivity {
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_contact, container, false);
 
+            ActionBar bar = getActivity().getActionBar();
+            bar.setDisplayHomeAsUpEnabled(true);
+
             db = new DatabaseHelper(getActivity().getApplicationContext());
             List<Contact> contacts = db.getAllContacts();
             cAdapter = new ContactAdapter(getActivity(), new ArrayList<Contact>());
@@ -76,6 +85,21 @@ public class ContactActivity extends ActionBarActivity {
             lv.setAdapter(cAdapter);
             cAdapter.clear();
             cAdapter.addAll(contacts);
+
+            LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.ll_add);
+            TextView tv = (TextView) rootView.findViewById(R.id.contact_add);
+
+            ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = getActivity().getApplicationContext();
+                    CharSequence text = "Todo: Launch Add Contact activity";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            });
 
             return rootView;
         }
