@@ -13,6 +13,7 @@
     <string name="btn_vacation">Vacation</string>
     <string name="btn_late">Late</string>
     <string name="btn_sick">Sick</string>
+    <string name="btn_add_contact">Add Contact</string>
 
     <!-- Activity Names -->
     <string name="title_activity_main">Main</string>
