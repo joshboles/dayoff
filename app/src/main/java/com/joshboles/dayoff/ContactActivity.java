@@ -8,6 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.joshboles.dayoff.helper.DatabaseHelper;
+import com.joshboles.dayoff.model.Contact;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactActivity extends ActionBarActivity {
 
@@ -49,6 +56,10 @@ public class ContactActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        DatabaseHelper db;
+        ContactAdapter cAdapter;
+        ListView lv;
+
         public PlaceholderFragment() {
         }
 
@@ -56,8 +67,19 @@ public class ContactActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_contact, container, false);
+
+            db = new DatabaseHelper(getActivity().getApplicationContext());
+            List<Contact> contacts = db.getAllContacts();
+            cAdapter = new ContactAdapter(getActivity(), new ArrayList<Contact>());
+
+            lv = (ListView) rootView.findViewById(R.id.contact_listview);
+            lv.setAdapter(cAdapter);
+            cAdapter.clear();
+            cAdapter.addAll(contacts);
+
             return rootView;
         }
+
     }
 
 }
