@@ -140,7 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String selectQuery = "SELECT  * FROM " + TABLE_MESSAGE + " WHERE "
-                + KEY_LABEL + " = " + message_label;
+                + KEY_LABEL + " = '" + message_label + "'";
 
         Log.e(LOG, selectQuery);
 
