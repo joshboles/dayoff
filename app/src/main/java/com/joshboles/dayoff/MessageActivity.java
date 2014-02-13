@@ -1,5 +1,6 @@
 package com.joshboles.dayoff;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.joshboles.dayoff.helper.DatabaseHelper;
+import com.joshboles.dayoff.model.Message;
 
 public class MessageActivity extends ActionBarActivity {
 
@@ -38,7 +43,8 @@ public class MessageActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == android.R.id.home) {
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -49,6 +55,12 @@ public class MessageActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        DatabaseHelper db;
+
+        TextView tvVacation;
+        TextView tvLate;
+        TextView tvSick;
+
         public PlaceholderFragment() {
         }
 
@@ -56,6 +68,23 @@ public class MessageActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_message, container, false);
+
+            ActionBar bar = getActivity().getActionBar();
+            bar.setDisplayHomeAsUpEnabled(true);
+
+            db = new DatabaseHelper(getActivity().getApplicationContext());
+            Message dbVacation = db.getMessage("vacation");
+            Message dbLate= db.getMessage("late");
+            Message dbSick = db.getMessage("sick");
+
+            tvVacation = (TextView) rootView.findViewById(R.id.tv_vacation);
+            tvLate = (TextView) rootView.findViewById(R.id.tv_late);
+            tvSick = (TextView) rootView.findViewById(R.id.tv_sick);
+
+            tvVacation.setText(dbVacation.getContent());
+            tvLate.setText(dbLate.getContent());
+            tvSick.setText(dbSick.getContent());
+
             return rootView;
         }
     }
