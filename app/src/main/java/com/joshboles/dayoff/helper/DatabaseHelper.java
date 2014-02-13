@@ -106,7 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ct.setName((c.getString(c.getColumnIndex(KEY_NAME))));
                 ct.setPhoneNumber(c.getString(c.getColumnIndex(KEY_NUMBER)));
 
-                // adding to todo list
+                // adding to contact list
                 contacts.add(ct);
             } while (c.moveToNext());
         }
