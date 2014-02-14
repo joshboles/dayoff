@@ -71,8 +71,6 @@ public class ContactActivity extends ActionBarActivity {
         ListView lv;
         LinearLayout ll;
 
-        Contact dContact;
-
         public PlaceholderFragment() {
         }
 
