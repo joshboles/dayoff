@@ -1,8 +1,11 @@
 package com.joshboles.dayoff;
 
 import android.app.ActionBar;
-import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -13,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.joshboles.dayoff.helper.DatabaseHelper;
 import com.joshboles.dayoff.model.Contact;
@@ -73,18 +75,13 @@ public class ContactActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_contact, container, false);
+            lv = (ListView) rootView.findViewById(R.id.contact_listview);
 
+            // Enable up button for action bar
             ActionBar bar = getActivity().getActionBar();
             bar.setDisplayHomeAsUpEnabled(true);
 
-            db = new DatabaseHelper(getActivity().getApplicationContext());
-            List<Contact> contacts = db.getAllContacts();
-            cAdapter = new ContactAdapter(getActivity(), new ArrayList<Contact>());
-
-            lv = (ListView) rootView.findViewById(R.id.contact_listview);
-            lv.setAdapter(cAdapter);
-            cAdapter.clear();
-            cAdapter.addAll(contacts);
+            updateContacts();
 
             LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.ll_add);
             TextView tv = (TextView) rootView.findViewById(R.id.contact_add);
@@ -92,16 +89,58 @@ public class ContactActivity extends ActionBarActivity {
             ll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Context context = getActivity().getApplicationContext();
-                    CharSequence text = "Todo: Launch Add Contact activity";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+                    startActivityForResult(intent, 1);
                 }
             });
 
             return rootView;
+        }
+
+        public void updateContacts(){
+            db = new DatabaseHelper(getActivity().getApplicationContext());
+            List<Contact> contacts = db.getAllContacts();
+            cAdapter = new ContactAdapter(getActivity(), new ArrayList<Contact>());
+
+            lv.setAdapter(cAdapter);
+            cAdapter.clear();
+            cAdapter.addAll(contacts);
+        }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (data != null) {
+                Uri uri = data.getData();
+
+                if (uri != null) {
+                    Cursor c = null;
+                    try {
+                        c = getActivity().getContentResolver().query(uri, new String[]{
+                                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                                ContactsContract.CommonDataKinds.Phone.NUMBER,
+                                ContactsContract.CommonDataKinds.Phone.TYPE },
+                                null, null, null);
+
+                        if (c != null && c.moveToFirst()) {
+                            String name = c.getString(0);
+                            String number = c.getString(1);
+                            int type = c.getInt(2);
+                            saveNewContact(type, name, number);
+                        }
+                    } finally {
+                        if (c != null) {
+                            c.close();
+                        }
+                    }
+                }
+            }
+        }
+
+        public void saveNewContact(int type, String name, String number) {
+            Contact contact = new Contact(name, number);
+            db.createContact(contact);
+            updateContacts();
         }
 
     }
