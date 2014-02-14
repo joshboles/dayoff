@@ -135,6 +135,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return message_id;
     }
 
+    // Check if message is set
+    public boolean messageExists(String message_label){
+        Boolean exists;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT  * FROM " + TABLE_MESSAGE + " WHERE "
+                + KEY_LABEL + " = '" + message_label + "'";
+
+        Log.e(LOG, selectQuery);
+        Cursor c = db.rawQuery(selectQuery, null);
+        exists = (c != null);
+        return exists;
+    }
+
     // Get single message (used for sending)
     public Message getMessage(String message_label) {
         SQLiteDatabase db = this.getReadableDatabase();
