@@ -13,7 +13,6 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.joshboles.dayoff.helper.DatabaseHelper;
-import com.joshboles.dayoff.model.Contact;
 import com.joshboles.dayoff.model.Message;
 import com.joshboles.dayoff.util.SystemUiHider;
 
@@ -66,45 +65,61 @@ public class FullSplashActivity extends Activity {
         db = new DatabaseHelper(getApplicationContext());
         Context context = getApplicationContext();
 
+
+        // Check that contacts exist.
         if(db.getAllContacts().size() == 0){
-            CharSequence text = "No contacts. Adding filler data.";
+            CharSequence text = "No contacts found.";
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
-
-            Contact c1 = new Contact("Kevin Sturdevant", "1112223333");
-            Contact c2 = new Contact("Josh Boles", "7778889999");
-            Contact c3 = new Contact("Ghostbusters", "0000000000");
-
-            db.createContact(c1);
-            db.createContact(c2);
-            db.createContact(c3);
+        } else {
+            CharSequence text = "Contacts found.";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
-        if(db.getMessage("vacation") == null){
+        // Check that vacation message is set.
+        // If not, create it.
+        if(!db.messageExists("vacation")){
             CharSequence text = "Vacation message not found. Creating one.";
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
 
             Message mV = new Message("vacation", "Hey, I had something come up and need to take a vacation day.");
             db.createMessage(mV);
+        } else {
+            CharSequence text = "Vacation message found.";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
-        if(db.getMessage("late") == null){
+        // Check that late message is set.
+        // If not, create it.
+        if(!db.messageExists("late")){
             CharSequence text = "Late message not found. Creating one.";
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
 
-            Message mL = new Message("late", "Guys, I’m running late. Be in ASAP.  \n");
+            Message mL = new Message("late", "Guys, I’m running late. Be in ASAP.");
             db.createMessage(mL);
+        } else {
+            CharSequence text = "Late message found.";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
-        if(db.getMessage("sick") == null){
+        // Check that sick message is set.
+        // If not, create it.
+        if(!db.messageExists("sick")){
             CharSequence text = "Sick message not found. Creating one.";
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
 
-            Message mS = new Message("sick", "I’m not feeling well and will be using a sick day today.  \n");
+            Message mS = new Message("sick", "I’m not feeling well and will be using a sick day today.");
             db.createMessage(mS);
+        } else {
+            CharSequence text = "Sick message found.";
+            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         /**
