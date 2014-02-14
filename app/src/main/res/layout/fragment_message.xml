@@ -10,25 +10,58 @@
     android:orientation="vertical"
     tools:context="com.joshboles.dayoff.MessageActivity$PlaceholderFragment">
 
+    <ImageView
+        android:src="@drawable/vacation_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
     <TextView
         android:id="@+id/tv_vacation"
+        android:layout_marginTop="@dimen/message_margin_top"
+        android:layout_marginBottom="@dimen/message_margin_bottom"
+        android:paddingLeft="@dimen/message_padding_side"
+        android:paddingRight="@dimen/message_padding_side"
         android:textColor="@android:color/white"
-        android:text="VACATION"
+        android:text="... vacation message placeholder ..."
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:src="@drawable/late_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/tv_late"
-        android:text="LATE"
+        android:layout_marginTop="@dimen/message_margin_top"
+        android:layout_marginBottom="@dimen/message_margin_bottom"
+        android:paddingLeft="@dimen/message_padding_side"
+        android:paddingRight="@dimen/message_padding_side"
+        android:text="... late message placeholder ..."
         android:textColor="@android:color/white"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:src="@drawable/sick_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/tv_sick"
-        android:text="SICK"
+        android:layout_marginTop="@dimen/message_margin_top"
+        android:layout_marginBottom="@dimen/message_margin_bottom"
+        android:paddingLeft="@dimen/message_padding_side"
+        android:paddingRight="@dimen/message_padding_side"
         android:textColor="@android:color/white"
+        android:text="... sick message placeholder ..."
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

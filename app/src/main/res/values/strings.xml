@@ -10,9 +10,9 @@
     <string name="action_settings">Settings</string>
 
     <!-- Button Strings -->
-    <string name="btn_vacation">Vacation</string>
-    <string name="btn_late">Late</string>
-    <string name="btn_sick">Sick</string>
+    <string name="vacation">Vacation</string>
+    <string name="late">Late</string>
+    <string name="sick">Sick</string>
     <string name="btn_add_contact">Add Contact</string>
 
     <!-- Activity Names -->
