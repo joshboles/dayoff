@@ -1,15 +1,21 @@
 package com.joshboles.dayoff;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joshboles.dayoff.helper.DatabaseHelper;
 import com.joshboles.dayoff.model.Message;
@@ -61,6 +67,12 @@ public class MessageActivity extends ActionBarActivity {
         TextView tvLate;
         TextView tvSick;
 
+        Message dbVacation;
+        Message dbLate;
+        Message dbSick;
+
+        String messageType;
+
         public PlaceholderFragment() {
         }
 
@@ -73,9 +85,9 @@ public class MessageActivity extends ActionBarActivity {
             bar.setDisplayHomeAsUpEnabled(true);
 
             db = new DatabaseHelper(getActivity().getApplicationContext());
-            Message dbVacation = db.getMessage("vacation");
-            Message dbLate= db.getMessage("late");
-            Message dbSick = db.getMessage("sick");
+            dbVacation = db.getMessage("vacation");
+            dbLate= db.getMessage("late");
+            dbSick = db.getMessage("sick");
 
             tvVacation = (TextView) rootView.findViewById(R.id.tv_vacation);
             tvLate = (TextView) rootView.findViewById(R.id.tv_late);
@@ -85,8 +97,88 @@ public class MessageActivity extends ActionBarActivity {
             tvLate.setText(dbLate.getContent());
             tvSick.setText(dbSick.getContent());
 
+            tvVacation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editMessage(dbVacation);
+                }
+            });
+
+            tvLate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editMessage(dbLate);
+                }
+            });
+
+            tvSick.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editMessage(dbSick);
+                }
+            });
+
             return rootView;
         }
+
+        private void editMessage(Message message){
+            // Save which message is being edited
+            messageType = message.getLabel();
+
+            // Build alert dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            String title = "Edit" + messageType;
+            builder.setTitle(title);
+
+            // Set up the input
+            final EditText input = new EditText(getActivity());
+            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+
+            input.setText(message.getContent());
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Context context = getActivity().getApplicationContext();
+                    CharSequence text = "Error saving.";
+                    if(messageType == dbVacation.getLabel()){
+                        text = "Changes saved for: Vacation";
+                        dbVacation.setContent(input.getText().toString());
+                        db.updateMessage(dbVacation);
+                        tvVacation.setText(dbVacation.getContent());
+                    }
+
+                    if(messageType == dbLate.getLabel()){
+                        text = "Changes saved for: Late";
+                        dbLate.setContent(input.getText().toString());
+                        db.updateMessage(dbLate);
+                        tvLate.setText(dbLate.getContent());
+                    }
+
+                    if(messageType == dbSick.getLabel()){
+                        text = "Changes saved for: Sick";
+                        dbSick.setContent(input.getText().toString());
+                        db.updateMessage(dbSick);
+                        tvSick.setText(dbSick.getContent());
+                    }
+                    Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
+        }
+
     }
 
 }
