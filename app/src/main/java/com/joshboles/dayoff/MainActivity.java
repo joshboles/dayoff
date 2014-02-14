@@ -121,34 +121,57 @@ public class MainActivity extends ActionBarActivity {
         }
 
         public void sendSMS(final Message message){
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            // set title
-            builder.setTitle("Send " + message.getLabel() + " message?");
-            builder.setMessage("Click yes to send");
-            builder.setCancelable(false);
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    List<Contact> contacts = db.getAllContacts();
-                    for(Contact c : contacts){
-                        SmsManager sms = SmsManager.getDefault();
-                        sms.sendTextMessage(c.getPhoneNumber(), null, message.getContent(), null, null);
+            if(db.getAllContacts().size() != 0){
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                // set title
+                builder.setTitle("Send " + message.getLabel() + " message?");
+                builder.setMessage("Click yes to send");
+                builder.setCancelable(false);
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
                     }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        List<Contact> contacts = db.getAllContacts();
+                        for(Contact c : contacts){
+                            SmsManager sms = SmsManager.getDefault();
+                            sms.sendTextMessage(c.getPhoneNumber(), null, message.getContent(), null, null);
+                        }
 
-                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), R.string.send_sms_success, Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            });
+                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), R.string.send_sms_success, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
 
-            // create alert dialog
-            AlertDialog alert = builder.create();
-            // show it
-            alert.show();
+                // create alert dialog
+                AlertDialog alert = builder.create();
+                // show it
+                alert.show();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                // set title
+                builder.setTitle("No contacts found. Add some?");
+                //builder.setMessage("");
+                builder.setCancelable(false);
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(getActivity(), ContactActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                // create alert dialog
+                AlertDialog alert = builder.create();
+                // show it
+                alert.show();
+            }
         }
     }
 
