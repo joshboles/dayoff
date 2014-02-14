@@ -1,6 +1,8 @@
 package com.joshboles.dayoff;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,9 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.joshboles.dayoff.helper.DatabaseHelper;
 import com.joshboles.dayoff.model.Contact;
@@ -67,6 +69,9 @@ public class ContactActivity extends ActionBarActivity {
         DatabaseHelper db;
         ContactAdapter cAdapter;
         ListView lv;
+        LinearLayout ll;
+
+        Contact dContact;
 
         public PlaceholderFragment() {
         }
@@ -75,23 +80,31 @@ public class ContactActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_contact, container, false);
+
+            // Grab what's needed from the UI
             lv = (ListView) rootView.findViewById(R.id.contact_listview);
+            ll = (LinearLayout) rootView.findViewById(R.id.ll_add);
+
+            updateContacts();
 
             // Enable up button for action bar
             ActionBar bar = getActivity().getActionBar();
             bar.setDisplayHomeAsUpEnabled(true);
 
-            updateContacts();
-
-            LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.ll_add);
-            TextView tv = (TextView) rootView.findViewById(R.id.contact_add);
-
+            // OnClick for Adding a new contact
             ll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
                     startActivityForResult(intent, 1);
+                }
+            });
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    deleteContact(cAdapter.getItem(position));
                 }
             });
 
@@ -138,11 +151,38 @@ public class ContactActivity extends ActionBarActivity {
         }
 
         public void saveNewContact(int type, String name, String number) {
+
+            // Check that new contact doesn't already exist.
+
             Contact contact = new Contact(name, number);
             db.createContact(contact);
             updateContacts();
         }
 
+        public void deleteContact(final Contact contact){
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            // set title
+            builder.setTitle("Delete " + contact.getName() + "?");
+            // set dialog message
+            builder.setMessage("Click yes to delete");
+            builder.setCancelable(false);
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    db.deleteContact(contact.getID());
+                    updateContacts();
+                }
+            });
+
+            // create alert dialog
+            AlertDialog alert = builder.create();
+            // show it
+            alert.show();
+        }
     }
 
 }
