@@ -20,4 +20,7 @@
     <string name="title_activity_message">Messages</string>
     <string name="title_activity_contact">Contacts</string>
 
+    <!-- Toasts -->
+    <string name="send_sms_success">Message(s) sent</string>
+
 </resources>

@@ -1,5 +1,7 @@
 package com.joshboles.dayoff;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,9 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.joshboles.dayoff.helper.DatabaseHelper;
+import com.joshboles.dayoff.model.Contact;
 import com.joshboles.dayoff.model.Message;
+
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -90,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     msgVacation = db.getMessage("vacation");
-                    sendSMS(msgVacation.getContent());
+                    sendSMS(msgVacation);
                 }
             });
 
@@ -98,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     msgLate = db.getMessage("late");
-                    sendSMS(msgLate.getContent());
+                    sendSMS(msgLate);
                 }
             });
 
@@ -106,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     msgSick = db.getMessage("sick");
-                    sendSMS(msgSick.getContent());
+                    sendSMS(msgSick);
                 }
             });
 
@@ -114,10 +120,35 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
 
-        public void sendSMS(String message){
-            String phoneNumber = "6143602177";
-            SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(phoneNumber, null, message, null, null);
+        public void sendSMS(final Message message){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            // set title
+            builder.setTitle("Send " + message.getLabel() + " message?");
+            builder.setMessage("Click yes to send");
+            builder.setCancelable(false);
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    List<Contact> contacts = db.getAllContacts();
+                    for(Contact c : contacts){
+                        SmsManager sms = SmsManager.getDefault();
+                        sms.sendTextMessage(c.getPhoneNumber(), null, message.getContent(), null, null);
+                    }
+
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), R.string.send_sms_success, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            });
+
+            // create alert dialog
+            AlertDialog alert = builder.create();
+            // show it
+            alert.show();
         }
     }
 
