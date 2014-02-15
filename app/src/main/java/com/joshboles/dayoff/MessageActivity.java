@@ -144,28 +144,34 @@ public class MessageActivity extends ActionBarActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     Context context = getActivity().getApplicationContext();
                     CharSequence text = "Error saving.";
-                    if(messageType == dbVacation.getLabel()){
-                        text = "Changes saved for: Vacation";
-                        dbVacation.setContent(input.getText().toString());
-                        db.updateMessage(dbVacation);
-                        tvVacation.setText(dbVacation.getContent());
-                    }
 
-                    if(messageType == dbLate.getLabel()){
-                        text = "Changes saved for: Late";
-                        dbLate.setContent(input.getText().toString());
-                        db.updateMessage(dbLate);
-                        tvLate.setText(dbLate.getContent());
-                    }
+                    if(input.getText().toString().length() < 1){
+                        Toast toast = Toast.makeText(context, "Error: message must not be empty.", Toast.LENGTH_LONG);
+                        toast.show();
+                    } else {
+                        if(messageType == dbVacation.getLabel()){
+                            text = "Changes saved for: Vacation";
+                            dbVacation.setContent(input.getText().toString());
+                            db.updateMessage(dbVacation);
+                            tvVacation.setText(dbVacation.getContent());
+                        }
 
-                    if(messageType == dbSick.getLabel()){
-                        text = "Changes saved for: Sick";
-                        dbSick.setContent(input.getText().toString());
-                        db.updateMessage(dbSick);
-                        tvSick.setText(dbSick.getContent());
+                        if(messageType == dbLate.getLabel()){
+                            text = "Changes saved for: Late";
+                            dbLate.setContent(input.getText().toString());
+                            db.updateMessage(dbLate);
+                            tvLate.setText(dbLate.getContent());
+                        }
+
+                        if(messageType == dbSick.getLabel()){
+                            text = "Changes saved for: Sick";
+                            dbSick.setContent(input.getText().toString());
+                            db.updateMessage(dbSick);
+                            tvSick.setText(dbSick.getContent());
+                        }
+                        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                        toast.show();
                     }
-                    Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-                    toast.show();
                 }
             });
 
