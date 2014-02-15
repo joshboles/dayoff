@@ -79,7 +79,7 @@ public class FullSplashActivity extends Activity {
 
         // Check that vacation message is set.
         // If not, create it.
-        if(!db.messageExists("vacation")){
+        if(db.messageExists("vacation")){
             CharSequence text = "Vacation message not found. Creating one.";
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
@@ -94,7 +94,7 @@ public class FullSplashActivity extends Activity {
 
         // Check that late message is set.
         // If not, create it.
-        if(!db.messageExists("late")){
+        if(db.messageExists("late")){
             CharSequence text = "Late message not found. Creating one.";
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
@@ -109,7 +109,7 @@ public class FullSplashActivity extends Activity {
 
         // Check that sick message is set.
         // If not, create it.
-        if(!db.messageExists("sick")){
+        if(db.messageExists("sick")){
             CharSequence text = "Sick message not found. Creating one.";
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
