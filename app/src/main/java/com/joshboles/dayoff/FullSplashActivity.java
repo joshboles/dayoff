@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.Toast;
 
 import com.joshboles.dayoff.helper.DatabaseHelper;
 import com.joshboles.dayoff.model.Message;
@@ -68,59 +68,29 @@ public class FullSplashActivity extends Activity {
 
         // Check that contacts exist.
         if(db.getAllContacts().size() == 0){
-            CharSequence text = "No contacts found.";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
+//            CharSequence text = "No contacts found.";
+//            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+//            toast.show();
         } else {
-            CharSequence text = "Contacts found.";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
+//            CharSequence text = "Contacts found.";
+//            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+//            toast.show();
         }
 
-        // Check that vacation message is set.
-        // If not, create it.
-        if(db.messageExists("vacation")){
-            CharSequence text = "Vacation message not found. Creating one.";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
+        Log.e("Message count before", " = " + db.getMessageCount());
+        if(db.getMessageCount() != 3){
+            db.wipeMessages();
 
             Message mV = new Message("vacation", "Hey, I had something come up and need to take a vacation day.");
             db.createMessage(mV);
-        } else {
-            CharSequence text = "Vacation message found.";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
-        // Check that late message is set.
-        // If not, create it.
-        if(db.messageExists("late")){
-            CharSequence text = "Late message not found. Creating one.";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
 
             Message mL = new Message("late", "Guys, I’m running late. Be in ASAP.");
             db.createMessage(mL);
-        } else {
-            CharSequence text = "Late message found.";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
-        // Check that sick message is set.
-        // If not, create it.
-        if(db.messageExists("sick")){
-            CharSequence text = "Sick message not found. Creating one.";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
 
             Message mS = new Message("sick", "I’m not feeling well and will be using a sick day today.");
             db.createMessage(mS);
-        } else {
-            CharSequence text = "Sick message found.";
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
         }
+        Log.e("Message count after", " = " + db.getMessageCount());
 
         /**
          * Set timer for showing the splash screen.
@@ -132,7 +102,7 @@ public class FullSplashActivity extends Activity {
                 FullSplashActivity.this.startActivity(mainIntent);
                 FullSplashActivity.this.finish();
             }
-        }, 3000);
+        }, 1500);
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
