@@ -5,7 +5,10 @@
 
     <dimen name="message_margin_bottom">40dp</dimen>
     <dimen name="message_margin_top">15dp</dimen>
-    <dimen name="message_padding_side">30dp</dimen>
+    <dimen name="message_padding_side">30dp</dimen>j
 
+    <dimen name="main_activity_icon_margin">25dp</dimen>
+    <dimen name="main_activity_icon_padding">25dp</dimen>
+    <dimen name="main_activity_dimen_image">100dp</dimen>
 
-    </resources>
+</resources>

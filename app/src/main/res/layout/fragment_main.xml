@@ -16,35 +16,35 @@
 
         <ImageView
             android:id="@+id/iv_vacation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/main_activity_dimen_image"
+            android:layout_height="@dimen/main_activity_dimen_image"
             android:src="@drawable/vacation"
-            android:paddingTop="25dp"
-            android:paddingBottom="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
+            android:paddingTop="@dimen/main_activity_icon_padding"
+            android:paddingBottom="@dimen/main_activity_icon_padding"
+            android:layout_marginTop="@dimen/main_activity_icon_margin"
+            android:layout_marginBottom="@dimen/main_activity_icon_margin"
             android:layout_gravity="center"/>
 
         <ImageView
             android:id="@+id/iv_late"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/main_activity_dimen_image"
+            android:layout_height="@dimen/main_activity_dimen_image"
             android:src="@drawable/late"
-            android:paddingTop="25dp"
-            android:paddingBottom="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
+            android:paddingTop="@dimen/main_activity_icon_padding"
+            android:paddingBottom="@dimen/main_activity_icon_padding"
+            android:layout_marginTop="@dimen/main_activity_icon_margin"
+            android:layout_marginBottom="@dimen/main_activity_icon_margin"
             android:layout_gravity="center"/>
 
         <ImageView
             android:id="@+id/iv_sick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/main_activity_dimen_image"
+            android:layout_height="@dimen/main_activity_dimen_image"
             android:src="@drawable/sick"
-            android:paddingTop="25dp"
-            android:paddingBottom="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
+            android:paddingTop="@dimen/main_activity_icon_padding"
+            android:paddingBottom="@dimen/main_activity_icon_padding"
+            android:layout_marginTop="@dimen/main_activity_icon_margin"
+            android:layout_marginBottom="@dimen/main_activity_icon_margin"
             android:layout_gravity="center"/>
     </LinearLayout>
 </RelativeLayout>
