@@ -88,6 +88,7 @@ public class ContactActivity extends ActionBarActivity {
             // Enable up button for action bar
             ActionBar bar = getActivity().getActionBar();
             bar.setDisplayHomeAsUpEnabled(true);
+            bar.setIcon(R.drawable.ic_transparent);
 
             // OnClick for Adding a new contact
             ll.setOnClickListener(new View.OnClickListener() {

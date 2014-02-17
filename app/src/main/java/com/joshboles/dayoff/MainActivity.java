@@ -1,5 +1,6 @@
 package com.joshboles.dayoff;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -85,6 +86,9 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            ActionBar bar = getActivity().getActionBar();
+            bar.setIcon(R.drawable.ic_transparent);
 
             db = new DatabaseHelper(getActivity().getApplicationContext());
 

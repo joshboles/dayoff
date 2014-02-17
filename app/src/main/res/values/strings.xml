@@ -16,9 +16,9 @@
     <string name="btn_add_contact">Add Contact</string>
 
     <!-- Activity Names -->
-    <string name="title_activity_main">Main</string>
-    <string name="title_activity_message">Messages</string>
-    <string name="title_activity_contact">Contacts</string>
+    <string name="title_activity_main"></string>
+    <string name="title_activity_message"></string>
+    <string name="title_activity_contact"></string>
 
     <!-- Toasts -->
     <string name="send_sms_success">Message(s) sent</string>

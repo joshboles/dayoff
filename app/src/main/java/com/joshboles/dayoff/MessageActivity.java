@@ -83,6 +83,7 @@ public class MessageActivity extends ActionBarActivity {
 
             ActionBar bar = getActivity().getActionBar();
             bar.setDisplayHomeAsUpEnabled(true);
+            bar.setIcon(R.drawable.ic_transparent);
 
             db = new DatabaseHelper(getActivity().getApplicationContext());
             dbVacation = db.getMessage("vacation");
