@@ -25,7 +25,7 @@
 
         <ImageView
             android:id="@+id/contact_image_add"
-            android:src="@drawable/ic_action_new"
+            android:src="@drawable/action_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"/>
