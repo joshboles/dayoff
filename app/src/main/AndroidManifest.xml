@@ -10,16 +10,18 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/CustomActionBarTheme" >
+        android:theme="@style/CustomActionBarTheme">
         <activity
             android:name="com.joshboles.dayoff.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.joshboles.dayoff.FullSplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme" >
+            android:theme="@style/FullscreenTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,11 +30,13 @@
         </activity>
         <activity
             android:name="com.joshboles.dayoff.MessageActivity"
-            android:label="@string/title_activity_message" >
+            android:label="@string/title_activity_message"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.joshboles.dayoff.ContactActivity"
-            android:label="@string/title_activity_contact" >
+            android:label="@string/title_activity_contact"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
