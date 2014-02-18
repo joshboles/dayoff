@@ -2,12 +2,11 @@ package com.joshboles.dayoff;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -52,6 +51,8 @@ public class FullSplashActivity extends Activity {
     private SystemUiHider mSystemUiHider;
 
     DatabaseHelper db;
+    SharedPreferences prefs = null;
+    Intent mainIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,34 +64,7 @@ public class FullSplashActivity extends Activity {
         final View contentView = findViewById(R.id.fullscreen_content);
 
         db = new DatabaseHelper(getApplicationContext());
-        Context context = getApplicationContext();
-
-
-        // Check that contacts exist.
-        if(db.getAllContacts().size() == 0){
-//            CharSequence text = "No contacts found.";
-//            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-//            toast.show();
-        } else {
-//            CharSequence text = "Contacts found.";
-//            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-//            toast.show();
-        }
-
-        Log.e("Message count before", " = " + db.getMessageCount());
-        if(db.getMessageCount() != 3){
-            db.wipeMessages();
-
-            Message mV = new Message("vacation", "Hey, I had something come up and need to take a vacation day.");
-            db.createMessage(mV);
-
-            Message mL = new Message("late", "Guys, I’m running late. Be in ASAP.");
-            db.createMessage(mL);
-
-            Message mS = new Message("sick", "I’m not feeling well and will be using a sick day today.");
-            db.createMessage(mS);
-        }
-        Log.e("Message count after", " = " + db.getMessageCount());
+        prefs = getSharedPreferences("com.joshboles.dayoff", MODE_PRIVATE);
 
         /**
          * Set timer for showing the splash screen.
@@ -98,11 +72,27 @@ public class FullSplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                final Intent mainIntent = new Intent(FullSplashActivity.this, MainActivity.class);
+                if (prefs.getBoolean("firstrun", true)) {
+                    // First run
+                    // Set first run to false
+                    prefs.edit().putBoolean("firstrun", false).commit();
+
+                    //Populate database for first run.
+                    Message mV = new Message("vacation", "Hey, I had something come up and need to take a vacation day.");
+                    Message mL = new Message("late", "Guys, I’m running late. Be in ASAP.");
+                    Message mS = new Message("sick", "I’m not feeling well and will be using a sick day today.");
+                    db.createMessage(mV);
+                    db.createMessage(mL);
+                    db.createMessage(mS);
+
+                    mainIntent = new Intent(FullSplashActivity.this, OnboardingActivity.class);
+                } else {
+                    mainIntent = new Intent(FullSplashActivity.this, MainActivity.class);
+                }
                 FullSplashActivity.this.startActivity(mainIntent);
                 FullSplashActivity.this.finish();
             }
-        }, 1500);
+        }, 1000);
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
