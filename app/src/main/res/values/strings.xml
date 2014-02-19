@@ -33,4 +33,9 @@
     <string name="message_onboarding_title">Messages</string>
     <string name="message_onboarding_intro">Click to edit or, if these are cool, hit done</string>
 
+    <!-- SMS Prompts -->
+    <string name="sms_prompt_vacation">Taking the day off?</string>
+    <string name="sms_prompt_late">Running late?</string>
+    <string name="sms_prompt_sick">Feeling under the weather?</string>
+
 </resources>

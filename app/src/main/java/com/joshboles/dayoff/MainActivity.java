@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -99,24 +100,30 @@ public class MainActivity extends ActionBarActivity {
             ivVacation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Resources resources = getActivity().getResources();
+                    String str = resources.getString(R.string.sms_prompt_vacation);
                     msgVacation = db.getMessage("vacation");
-                    sendSMS(msgVacation);
+                    sendSMS(str, msgVacation);
                 }
             });
 
             ivLate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Resources resources = getActivity().getResources();
+                    String str = resources.getString(R.string.sms_prompt_late);
                     msgLate = db.getMessage("late");
-                    sendSMS(msgLate);
+                    sendSMS(str, msgLate);
                 }
             });
 
             ivSick.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Resources resources = getActivity().getResources();
+                    String str = resources.getString(R.string.sms_prompt_sick);
                     msgSick = db.getMessage("sick");
-                    sendSMS(msgSick);
+                    sendSMS(str, msgSick);
                 }
             });
 
@@ -124,12 +131,12 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
 
-        public void sendSMS(final Message message){
+        public void sendSMS(String prompt, final Message message){
             if(db.getAllContacts().size() != 0){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 // set title
-                builder.setTitle("Send " + message.getLabel() + " message?");
-                builder.setMessage("Click yes to send");
+                builder.setTitle(prompt);
+                builder.setMessage("Click yes to send.");
                 builder.setCancelable(false);
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
