@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">DayOff</string>
-    <string name="hello_world">Hello World</string>
 
     <!-- Menu Strings -->
     <string name="action_contacts">Contacts</string>
@@ -14,13 +13,24 @@
     <string name="late">Late</string>
     <string name="sick">Sick</string>
     <string name="btn_add_contact">Add Contact</string>
+    <string name="btn_done">Done</string>
 
     <!-- Activity Names -->
     <string name="title_activity_main"></string>
     <string name="title_activity_message"></string>
     <string name="title_activity_contact"></string>
+    <string name="title_activity_onboarding"></string>
 
     <!-- Toasts -->
-    <string name="send_sms_success">Message(s) sent</string>
+    <string name="send_sms_success">Successfully sent.</string>
+
+    <!-- Contact Onboarding -->
+    <string name="contact_onboarding_title">Who You Gonna Text?</string>
+    <string name="contact_onboarding_intro">You need the day off. Who needs to know? Select from your contacts and when the time comes, click a button and go right back to bed.</string>
+    <string name="contact_onboarding_button">Next</string>
+
+    <!-- Message Onboarding -->
+    <string name="message_onboarding_title">Messages</string>
+    <string name="message_onboarding_intro">Click to edit or, if these are cool, hit done</string>
 
 </resources>
