@@ -29,6 +29,9 @@
     <string name="contact_onboarding_intro">You need the day off. Who needs to know? Select from your contacts and when the time comes, click a button and go right back to bed.</string>
     <string name="contact_onboarding_button">Next</string>
 
+    <!-- Contact Activity -->
+    <string name="empty_contacts">Add a contact to get started.</string>
+
     <!-- Message Onboarding -->
     <string name="message_onboarding_title">Messages</string>
     <string name="message_onboarding_intro">Click to edit or, if these are cool, hit done</string>

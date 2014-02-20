@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.joshboles.dayoff.helper.DatabaseHelper;
 import com.joshboles.dayoff.model.Contact;
@@ -84,6 +85,11 @@ public class ContactActivity extends ActionBarActivity {
             ll = (LinearLayout) rootView.findViewById(R.id.ll_add);
 
             updateContacts();
+
+            // Empty text for no contacts.
+            TextView emptyText = (TextView) rootView.findViewById(R.id.empty_contacts);
+            emptyText.setText(R.string.empty_contacts);
+            lv.setEmptyView(emptyText);
 
             // Enable up button for action bar
             ActionBar bar = getActivity().getActionBar();

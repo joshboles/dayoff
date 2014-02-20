@@ -10,10 +10,18 @@
     android:background="@color/other_blue"
     tools:context="com.joshboles.dayoff.ContactActivity$PlaceholderFragment">
 
+    <TextView
+        android:id="@+id/empty_contacts"
+        android:layout_width="wrap_content"
+        android:layout_height="440dp"
+        android:textSize="18dp"
+        android:layout_gravity="center"
+        android:textColor="@android:color/white" />
+
     <ListView
         android:id="@+id/contact_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="440dp">
     </ListView>
 
     <LinearLayout
@@ -28,13 +36,14 @@
             android:src="@drawable/action_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"/>
+            android:layout_weight="5"            />
 
         <TextView
             android:id="@+id/contact_add"
             android:text="@string/btn_add_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:layout_weight="1"/>
