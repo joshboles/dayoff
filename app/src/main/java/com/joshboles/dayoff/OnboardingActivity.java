@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -295,9 +296,11 @@ public class OnboardingActivity extends Activity {
 
             // Set up the input
             final EditText input = new EditText(getActivity());
-            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            input.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+            input.setSingleLine(false);
+            input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
             builder.setView(input);
+            input.setText(message.getContent());
 
             input.setText(message.getContent());
 

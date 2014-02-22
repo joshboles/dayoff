@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -128,15 +129,15 @@ public class MessageActivity extends ActionBarActivity {
 
             // Build alert dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            String title = "Edit" + messageType;
-            builder.setTitle(title);
+//            String title = "Edit" + messageType;
+//            builder.setTitle(title);
 
             // Set up the input
             final EditText input = new EditText(getActivity());
-            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            input.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+            input.setSingleLine(false);
+            input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
             builder.setView(input);
-
             input.setText(message.getContent());
 
             // Set up the buttons
