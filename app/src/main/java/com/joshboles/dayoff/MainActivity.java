@@ -78,6 +78,9 @@ public class MainActivity extends ActionBarActivity {
         Message msgLate;
         Message msgSick;
 
+        String msgType;
+        Integer toastText;
+
         DatabaseHelper db;
 
         public PlaceholderFragment() {
@@ -102,6 +105,7 @@ public class MainActivity extends ActionBarActivity {
                 public void onClick(View v) {
                     Resources resources = getActivity().getResources();
                     String str = resources.getString(R.string.sms_prompt_vacation);
+                    msgType = "vacation";
                     msgVacation = db.getMessage("vacation");
                     sendSMS(str, msgVacation);
                 }
@@ -112,6 +116,7 @@ public class MainActivity extends ActionBarActivity {
                 public void onClick(View v) {
                     Resources resources = getActivity().getResources();
                     String str = resources.getString(R.string.sms_prompt_late);
+                    msgType = "late";
                     msgLate = db.getMessage("late");
                     sendSMS(str, msgLate);
                 }
@@ -122,6 +127,7 @@ public class MainActivity extends ActionBarActivity {
                 public void onClick(View v) {
                     Resources resources = getActivity().getResources();
                     String str = resources.getString(R.string.sms_prompt_sick);
+                    msgType = "sick";
                     msgSick = db.getMessage("sick");
                     sendSMS(str, msgSick);
                 }
@@ -151,7 +157,16 @@ public class MainActivity extends ActionBarActivity {
                             sms.sendTextMessage(c.getPhoneNumber(), null, message.getContent(), null, null);
                         }
 
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), R.string.send_sms_success, Toast.LENGTH_SHORT);
+                        // Set toast based on what message was sent.
+                        if(msgType == "vacation"){
+                            toastText = R.string.send_vacation_success;
+                        } else if (msgType == "late"){
+                            toastText = R.string.send_late_success;
+                        } else if (msgType == "sick") {
+                            toastText = R.string.send_sick_success;
+                        }
+
+                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), toastText, Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 });

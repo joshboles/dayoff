@@ -22,7 +22,9 @@
     <string name="title_activity_onboarding"></string>
 
     <!-- Toasts -->
-    <string name="send_sms_success">Successfully sent.</string>
+    <string name="send_vacation_success">Message sent. Enjoy your day off.</string>
+    <string name="send_late_success">Message sent. Now hurry up!</string>
+    <string name="send_sick_success">Message sent. Feel better.</string>
 
     <!-- Contact Onboarding -->
     <string name="contact_onboarding_title">Who You Gonna Text?</string>
