@@ -58,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
             android:textSize="20sp"
             android:text="@string/btn_add_contact"/>
 
@@ -71,6 +72,8 @@
             android:id="@+id/contact_onboard_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/button_color"
+            android:textColor="@android:color/white"
             android:text="@string/contact_onboarding_button"/>
     </LinearLayout>
 </LinearLayout>

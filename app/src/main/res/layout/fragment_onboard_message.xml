@@ -18,9 +18,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/ob_message_font_size"
         android:textColor="@android:color/white"
         android:layout_gravity="center"
-        android:text="@string/message_onboarding_title"/>
+        android:text="@string/message_onboarding_title"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,14 +40,16 @@
 
     <TextView
         android:id="@+id/tv_vacation"
-        android:layout_marginTop="@dimen/message_margin_top"
-        android:layout_marginBottom="@dimen/message_margin_bottom"
-        android:paddingLeft="@dimen/message_padding_side"
-        android:paddingRight="@dimen/message_padding_side"
+        android:layout_marginTop="@dimen/ob_message_margin_top"
+        android:layout_marginBottom="@dimen/ob_message_margin_bottom"
+        android:paddingLeft="@dimen/ob_message_padding_side"
+        android:paddingRight="@dimen/ob_message_padding_side"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/ob_message_font_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:text="... message placeholder ..."/>
 
     <ImageView
         android:src="@drawable/late_label"
@@ -55,14 +59,16 @@
 
     <TextView
         android:id="@+id/tv_late"
-        android:layout_marginTop="@dimen/message_margin_top"
-        android:layout_marginBottom="@dimen/message_margin_bottom"
-        android:paddingLeft="@dimen/message_padding_side"
-        android:paddingRight="@dimen/message_padding_side"
+        android:layout_marginTop="@dimen/ob_message_margin_top"
+        android:layout_marginBottom="@dimen/ob_message_margin_bottom"
+        android:paddingLeft="@dimen/ob_message_padding_side"
+        android:paddingRight="@dimen/ob_message_padding_side"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/ob_message_font_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:text="... message placeholder ..."/>
 
     <ImageView
         android:src="@drawable/sick_label"
@@ -72,21 +78,24 @@
 
     <TextView
         android:id="@+id/tv_sick"
-        android:layout_marginTop="@dimen/message_margin_top"
-        android:layout_marginBottom="@dimen/message_margin_bottom"
-        android:paddingLeft="@dimen/message_padding_side"
-        android:paddingRight="@dimen/message_padding_side"
+        android:layout_marginTop="@dimen/ob_message_margin_top"
+        android:layout_marginBottom="@dimen/ob_message_margin_bottom"
+        android:paddingLeft="@dimen/ob_message_padding_side"
+        android:paddingRight="@dimen/ob_message_padding_side"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/ob_message_font_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:text="... message placeholder ..."/>
 
     <Button
         android:id="@+id/message_onboard_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:textColor="#ecf0f1"
+        android:background="@color/button_color"
+        android:textColor="@android:color/white"
         android:text="@string/btn_done"/>
 
 </LinearLayout>

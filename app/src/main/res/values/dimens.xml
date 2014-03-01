@@ -3,15 +3,21 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="message_margin_bottom">40dp</dimen>
-    <dimen name="message_margin_top">15dp</dimen>
-    <dimen name="message_padding_side">30dp</dimen>j
+    <dimen name="message_margin_bottom">50dp</dimen>
+    <dimen name="message_margin_top">25dp</dimen>
+    <dimen name="message_padding_side">30dp</dimen>
+    <dimen name="message_font_size">16dp</dimen>
+
+    <dimen name="ob_message_margin_bottom">35dp</dimen>
+    <dimen name="ob_message_margin_top">15dp</dimen>
+    <dimen name="ob_message_padding_side">30dp</dimen>
+    <dimen name="ob_message_font_size">14dp</dimen>
 
     <dimen name="main_activity_icon_margin">15dp</dimen>
     <dimen name="main_activity_icon_padding">25dp</dimen>
     <dimen name="main_activity_dimen_image">125dp</dimen>
 
-    <dimen name="onboarding_icon">75dp</dimen>
+    <dimen name="onboarding_icon">60dp</dimen>
 
     <dimen name="splash_logo_width">200dp</dimen>
     <dimen name="splash_logo_height">300dp</dimen>
