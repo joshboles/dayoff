@@ -119,9 +119,14 @@ public class FullSplashActivity extends Activity {
                                 mShortAnimTime = getResources().getInteger(
                                         android.R.integer.config_shortAnimTime);
                             }
+
+                            /* Commenting out because I don't know how to make the
+                                NullPointerException warning go away
+
                             controlsView.animate()
                                     .translationY(visible ? 0 : mControlsHeight)
                                     .setDuration(mShortAnimTime);
+                            */
                         } else {
                             // If the ViewPropertyAnimator APIs aren't
                             // available, simply show or hide the in-layout UI
@@ -129,7 +134,7 @@ public class FullSplashActivity extends Activity {
                             controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
                         }
 
-                        if (visible && AUTO_HIDE) {
+                        if (visible) {
                             // Schedule a hide().
                             delayedHide(AUTO_HIDE_DELAY_MILLIS);
                         }
