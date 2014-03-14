@@ -7,24 +7,46 @@
     <LinearLayout
         android:id="@+id/contact_row_container"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/contact_row_delete"
-            android:src="@drawable/action_remove"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"/>
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/contact_row_name"
-            android:text="This is some text"
-            android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/contact_row_delete"
+                android:src="@drawable/action_remove"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:layout_weight="1"/>
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:id="@+id/contact_row_name"
+                android:text="This is some text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/contact_row_number"
+                android:text="This is some text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:textSize="14dp"
+                android:textStyle="italic"
+                android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

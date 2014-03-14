@@ -34,8 +34,10 @@ public class ContactAdapter extends ArrayAdapter<Contact>{
         Contact cl = mContacts.get(position);
 
         TextView labelView = (TextView) convertView.findViewById(R.id.contact_row_name);
+        TextView numberView = (TextView) convertView.findViewById(R.id.contact_row_number);
 
         labelView.setText(cl.getName());
+        numberView.setText(cl.getPhoneNumber());
 
         return convertView;
     }
