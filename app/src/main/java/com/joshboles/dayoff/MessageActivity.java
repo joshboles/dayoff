@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +22,7 @@ import android.widget.Toast;
 import com.joshboles.dayoff.helper.DatabaseHelper;
 import com.joshboles.dayoff.model.Message;
 
-public class MessageActivity extends ActionBarActivity {
+public class MessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +84,10 @@ public class MessageActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_message, container, false);
 
             ActionBar bar = getActivity().getActionBar();
-            bar.setDisplayHomeAsUpEnabled(true);
-            bar.setIcon(R.drawable.ic_transparent);
+            if (bar != null) {
+                bar.setDisplayHomeAsUpEnabled(true);
+                bar.setIcon(R.drawable.ic_transparent);
+            }
 
             db = new DatabaseHelper(getActivity().getApplicationContext());
             dbVacation = db.getMessage("vacation");

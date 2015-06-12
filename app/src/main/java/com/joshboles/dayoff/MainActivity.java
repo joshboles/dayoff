@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,7 +24,7 @@ import com.joshboles.dayoff.model.Message;
 
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,9 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             ActionBar bar = getActivity().getActionBar();
-            bar.setIcon(R.drawable.ic_transparent);
+            if (bar != null) {
+                bar.setIcon(R.drawable.ic_transparent);
+            }
 
             db = new DatabaseHelper(getActivity().getApplicationContext());
 

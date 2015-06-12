@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +27,7 @@ import com.joshboles.dayoff.model.Contact;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactActivity extends ActionBarActivity {
+public class ContactActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +94,10 @@ public class ContactActivity extends ActionBarActivity {
 
             // Enable up button for action bar
             ActionBar bar = getActivity().getActionBar();
-            bar.setDisplayHomeAsUpEnabled(true);
-            bar.setIcon(R.drawable.ic_transparent);
+            if (bar != null) {
+                bar.setDisplayHomeAsUpEnabled(true);
+                bar.setIcon(R.drawable.ic_transparent);
+            }
 
             // OnClick for Adding a new contact
             ll.setOnClickListener(new View.OnClickListener() {
